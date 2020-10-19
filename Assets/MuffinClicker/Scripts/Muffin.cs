@@ -7,6 +7,9 @@ public class Muffin : MonoBehaviour
     public int MuffinPerClick = 1;
     public TMP_Text MuffinAmountText;
 
+    public RectTransform Spinlight;
+    public float SpinlightVelocity;
+
     private double muffinAmount;
 
     public void OnClick()
@@ -14,7 +17,12 @@ public class Muffin : MonoBehaviour
         AddMuffins(MuffinPerClick);
     }
 
-    public void Awake()
+    public void Update()
+    {
+        Spinlight.Rotate(0, 0, SpinlightVelocity * Time.deltaTime);
+    }
+
+    public void Start()
     {
         SetMuffins(0);
     }
