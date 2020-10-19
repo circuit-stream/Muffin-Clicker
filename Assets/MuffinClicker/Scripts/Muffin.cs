@@ -7,7 +7,7 @@ public class Muffin : MonoBehaviour
     public int MuffinPerClick = 1;
     public TMP_Text MuffinAmountText;
 
-    public RectTransform Spinlight;
+    public RectTransform[] Spinlights;
     public float SpinlightVelocity;
 
     private double muffinAmount;
@@ -19,7 +19,7 @@ public class Muffin : MonoBehaviour
 
     public void Update()
     {
-        Spinlight.Rotate(0, 0, SpinlightVelocity * Time.deltaTime);
+        AnimateSpinlights();
     }
 
     public void Start()
@@ -36,5 +36,21 @@ public class Muffin : MonoBehaviour
     {
         muffinAmount = newValue;
         MuffinAmountText.text = muffinAmount + " muffins";
+    }
+
+    private void AnimateSpinlights()
+    {
+        for (var index = 0; index < Spinlights.Length; index++)
+        {
+            var spinlight = Spinlights[index];
+
+            float velocity = SpinlightVelocity;
+            if (index % 2 == 0)
+            {
+                velocity *= 1.5f;
+            }
+
+            spinlight.Rotate(0, 0, velocity * Time.deltaTime);
+        }
     }
 }
