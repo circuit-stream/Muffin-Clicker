@@ -325,6 +325,32 @@ MonoBehaviour:
   MuffinClickRewardAnimationDuration: 1
   LittleMuffinPrefab: {fileID: 5769964935515853482, guid: ec58617e232b906498c17fa1b7f312c6,
     type: 3}
+  bounceVelocity: 20
+  AmplitudeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: -31.1628
+      outSlope: -31.1628
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.045186758
+    - serializedVersion: 3
+      time: 0.7
+      value: 0
+      inSlope: -0.20573568
+      outSlope: -0.20573568
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.089980125
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MuffinButton: {fileID: 829400011}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

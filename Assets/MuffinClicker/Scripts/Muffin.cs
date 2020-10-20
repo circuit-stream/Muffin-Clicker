@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -21,6 +22,12 @@ public class Muffin : MonoBehaviour
 
     public LittleMuffin LittleMuffinPrefab;
 
+    public float bounceVelocity = 20;
+    public AnimationCurve AmplitudeCurve;
+    public RectTransform MuffinButton;
+    private Coroutine muffinButtonAnimationCoroutine;
+    private float muffinButtonAnimationDuration;
+
     private RectTransform myRectTransform;
 
     public void OnClick()
@@ -28,6 +35,7 @@ public class Muffin : MonoBehaviour
         AddMuffins(MuffinPerClick);
         ClickRewardFeedback();
         CreateLittleMuffin();
+        StartMuffinButtonAnimation();
     }
 
     public void Update()
@@ -42,6 +50,7 @@ public class Muffin : MonoBehaviour
 
         myRectTransform = GetComponent<RectTransform>();
         clickRewardAnimationInfos = new List<MuffinClickRewardAnimationInfo>();
+        muffinButtonAnimationDuration = AmplitudeCurve.keys[AmplitudeCurve.length - 1].time;
     }
 
     private void AddMuffins(double addedValue)
@@ -120,6 +129,31 @@ public class Muffin : MonoBehaviour
 
         animationInfo.Destroy();
         return false;
+    }
+
+    private void StartMuffinButtonAnimation()
+    {
+        if (muffinButtonAnimationCoroutine != null)
+        {
+            StopCoroutine(muffinButtonAnimationCoroutine);
+        }
+
+        muffinButtonAnimationCoroutine = StartCoroutine(MuffinButtonAnimation());
+    }
+
+    private IEnumerator MuffinButtonAnimation()
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < muffinButtonAnimationDuration)
+        {
+            // Dividing by 100 so we can use a bigger scale for the curve, and see the setup better in the editor
+            var amplitude = AmplitudeCurve.Evaluate(elapsedTime) / 100;
+            MuffinButton.localScale = (1 + Mathf.Sin(elapsedTime * bounceVelocity) * amplitude) * Vector3.one;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private Vector2 RandomSpawnPosition()
