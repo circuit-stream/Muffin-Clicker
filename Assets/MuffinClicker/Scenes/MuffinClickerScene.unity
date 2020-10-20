@@ -313,7 +313,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MuffinPerClick: 1
-  Manager: {fileID: 447949685}
   Spinlights:
   - {fileID: 1594047314}
   - {fileID: 28660337}
@@ -1236,7 +1235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MuffinAmountText: {fileID: 1710630146}
-  Manager: {fileID: 447949685}
 --- !u!114 &2098545964
 MonoBehaviour:
   m_ObjectHideFlags: 0

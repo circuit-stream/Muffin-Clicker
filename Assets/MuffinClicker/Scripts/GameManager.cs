@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     private readonly string saveKey = "SaveKey";
+
+    public static GameManager Instance { get; private set; }
 
     public float saveEveryXSeconds = 1;
 
@@ -22,6 +25,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            throw new Exception($"Multiple singleton instances! {Instance} :: {this}");
+        }
+
+        Instance = this;
+
         LoadSaveData();
         StartCoroutine(SaveCoroutine());
     }
