@@ -6,8 +6,7 @@ using UnityEngine;
 public class Muffin : MonoBehaviour
 {
     public int MuffinPerClick = 1;
-    public TMP_Text MuffinAmountText;
-    private double muffinAmount;
+    public GameManager Manager;
 
     public RectTransform[] Spinlights;
     public float SpinlightVelocity;
@@ -32,7 +31,7 @@ public class Muffin : MonoBehaviour
 
     public void OnClick()
     {
-        AddMuffins(MuffinPerClick);
+        Manager.AddMuffins(MuffinPerClick);
         ClickRewardFeedback();
         CreateLittleMuffin();
         StartMuffinButtonAnimation();
@@ -46,23 +45,11 @@ public class Muffin : MonoBehaviour
 
     public void Start()
     {
-        SetMuffins(0);
-
         myRectTransform = GetComponent<RectTransform>();
         clickRewardAnimationInfos = new List<MuffinClickRewardAnimationInfo>();
         muffinButtonAnimationDuration = AmplitudeCurve.keys[AmplitudeCurve.length - 1].time;
     }
 
-    private void AddMuffins(double addedValue)
-    {
-        SetMuffins(muffinAmount + addedValue);
-    }
-
-    private void SetMuffins(double newValue)
-    {
-        muffinAmount = newValue;
-        MuffinAmountText.text = muffinAmount + " muffins";
-    }
 
     private void AnimateSpinlights()
     {
