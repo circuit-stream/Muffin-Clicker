@@ -19,12 +19,15 @@ public class Muffin : MonoBehaviour
     private const float muffinClickRewardSpeed = 40;
     private List<MuffinClickRewardAnimationInfo> clickRewardAnimationInfos;
 
+    public LittleMuffin LittleMuffinPrefab;
+
     private RectTransform myRectTransform;
 
     public void OnClick()
     {
         AddMuffins(MuffinPerClick);
         ClickRewardFeedback();
+        CreateLittleMuffin();
     }
 
     public void Update()
@@ -66,6 +69,12 @@ public class Muffin : MonoBehaviour
 
             spinlight.Rotate(0, 0, velocity * Time.deltaTime);
         }
+    }
+
+    private void CreateLittleMuffin()
+    {
+        LittleMuffin newObject = GameObject.Instantiate(LittleMuffinPrefab, myRectTransform);
+        newObject.Setup(RandomSpawnPosition());
     }
 
     private void ClickRewardFeedback()

@@ -318,11 +318,13 @@ MonoBehaviour:
   - {fileID: 1594047314}
   - {fileID: 28660337}
   SpinlightVelocity: 10
+  BottomLeftFeedbackSpawnPosition: {x: -200, y: 100}
+  TopRightFeedbackSpawnPosition: {x: 200, y: 200}
   MuffinClickRewardPrefab: {fileID: 1830297683697775922, guid: 91df3c9f714705b41a89f56f7a7dcd7b,
     type: 3}
   MuffinClickRewardAnimationDuration: 1
-  BottomLeftFeedbackSpawnPosition: {x: -200, y: 100}
-  TopRightFeedbackSpawnPosition: {x: 200, y: 200}
+  LittleMuffinPrefab: {fileID: 5769964935515853482, guid: ec58617e232b906498c17fa1b7f312c6,
+    type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
