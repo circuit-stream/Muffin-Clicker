@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ec6f92b36f46909a10ca1d035cf930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveEveryXSeconds: 1
 --- !u!4 &447949686
 Transform:
   m_ObjectHideFlags: 0
