@@ -6,7 +6,6 @@ using UnityEngine;
 public class Muffin : MonoBehaviour
 {
     public int MuffinPerClick = 1;
-    public GameManager Manager;
 
     public RectTransform[] Spinlights;
     public float SpinlightVelocity;
@@ -31,7 +30,7 @@ public class Muffin : MonoBehaviour
 
     public void OnClick()
     {
-        Manager.AddMuffins(MuffinPerClick);
+        GameManager.Instance.AddMuffins(MuffinPerClick);
         ClickRewardFeedback();
         CreateLittleMuffin();
         StartMuffinButtonAnimation();

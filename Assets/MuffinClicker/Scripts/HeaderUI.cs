@@ -4,10 +4,12 @@ using UnityEngine;
 public class HeaderUI : MonoBehaviour
 {
     public TMP_Text MuffinAmountText;
-    public GameManager Manager;
+
+    private GameManager gameManager;
 
     public void Start()
     {
+        gameManager = GameManager.Instance;
         SetTexts();
     }
 
@@ -18,6 +20,6 @@ public class HeaderUI : MonoBehaviour
 
     private void SetTexts()
     {
-        MuffinAmountText.text = $"{Manager.MuffinAmount} muffins";
+        MuffinAmountText.text = $"{gameManager.MuffinAmount} muffins";
     }
 }
