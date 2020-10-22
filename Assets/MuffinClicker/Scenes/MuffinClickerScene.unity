@@ -1222,6 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588279699}
   - component: {fileID: 1588279700}
+  - component: {fileID: 1588279701}
   m_Layer: 5
   m_Name: FancyMuffinButton
   m_TagString: Untagged
@@ -1292,6 +1293,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1588279701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588279698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e668d9d03c9401c829e55b6e6cf1068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupButton: {fileID: 1588279700}
+  CooldownDuration: 3
+  CooldownBar: {fileID: 1779028824}
+  MuffinPerActivation: 100
+  IconTransform: {fileID: 1123371798}
+  AnimationDuration: 0.3
+  WiggleAmplitude: 5
+  WiggleFrequency: 30
+  HeightMovedDuringAnimation: 7
 --- !u!1 &1594047313
 GameObject:
   m_ObjectHideFlags: 0
