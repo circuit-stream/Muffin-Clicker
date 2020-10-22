@@ -972,7 +972,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0da03db9357f10449feb70ecdcaeefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuffinPerClick: 1
+  MuffinPerClickPerLevel:
+  - 0
+  - 1
+  - 4
+  - 16
+  - 256
+  - 1024
   Spinlights:
   - {fileID: 1594047314}
   - {fileID: 28660337}
@@ -1550,6 +1556,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724396817}
   - component: {fileID: 724396818}
+  - component: {fileID: 724396819}
   m_Layer: 5
   m_Name: MuffinUpgradeContent
   m_TagString: Untagged
@@ -1624,6 +1631,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &724396819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724396816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33859e398c4ba099561b62f946337d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 724396818}
+  holderImage: {fileID: 572821898}
+  priceText: {fileID: 1817301733}
+  levelText: {fileID: 974751726}
+  icon: {fileID: 1233782774}
+  currencyIcon: {fileID: 297785959}
+  purchaseAvailableTextColor: {r: 0.27450982, g: 0.7490196, b: 0.22352943, a: 1}
+  purchaseDisabledTextColor: {r: 0.7490196, g: 0.24705884, b: 0.29411766, a: 1}
+  upgradableType: 0
+  pricePerLevel:
+  - 5
+  - 10
+  - 50
+  - 500
+  - 10000
 --- !u!1 &739821363
 GameObject:
   m_ObjectHideFlags: 0
