@@ -1,9 +1,16 @@
 using System.Collections;
+using MuffinClicker.Enums;
 using UnityEngine;
 
 public class FancyMuffinPowerup : Powerup
 {
-    public int MuffinPerActivation = 100;
+    public double[] MuffinPerActivationPerLevel = {0, 100, 200, 500, 5000};
+    private double MuffinPerActivation =>
+        currentUpgradableLevel >= MuffinPerActivationPerLevel.Length
+            ? MuffinPerActivationPerLevel[MuffinPerActivationPerLevel.Length - 1]
+            : MuffinPerActivationPerLevel[currentUpgradableLevel];
+
+    protected override UpgradableType upgradableType => UpgradableType.FancyMuffin;
 
     public RectTransform IconTransform;
 

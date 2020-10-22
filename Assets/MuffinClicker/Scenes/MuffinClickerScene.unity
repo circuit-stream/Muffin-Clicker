@@ -330,10 +330,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupButton: {fileID: 122910416}
-  CooldownDuration: 3
+  CooldownDurationPerLevel:
+  - 0
+  - 10
+  - 9
+  - 8
+  - 7
+  - 5
   CooldownBar: {fileID: 1585634160}
-  MuffiinExtraMultiplier: 1
-  PowerupDuration: 3
+  MultiplierPerLevel:
+  - 0
+  - 1
+  - 1.5
+  - 2
+  - 3
+  - 5
+  PowerupDurationPerLevel:
+  - 0
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
   BounceAmplitude: 0.1
   BounceFrequency: 10
 --- !u!114 &122910416
@@ -1144,6 +1162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 508737058}
   - component: {fileID: 508737059}
+  - component: {fileID: 508737060}
   m_Layer: 5
   m_Name: MilkshakeUpgradeContent
   m_TagString: Untagged
@@ -1218,6 +1237,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &508737060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508737057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33859e398c4ba099561b62f946337d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 508737059}
+  holderImage: {fileID: 2014255483}
+  priceText: {fileID: 340134507}
+  levelText: {fileID: 559112199}
+  icon: {fileID: 1179284564}
+  currencyIcon: {fileID: 1037065872}
+  purchaseAvailableTextColor: {r: 0.27450982, g: 0.7490196, b: 0.22352943, a: 1}
+  purchaseDisabledTextColor: {r: 0.7490196, g: 0.24705884, b: 0.29411766, a: 1}
+  upgradableType: 2
+  pricePerLevel:
+  - 30
+  - 100
+  - 500
+  - 3000
+  - 10000
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2900,6 +2946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1415964802}
   - component: {fileID: 1415964803}
+  - component: {fileID: 1415964804}
   m_Layer: 5
   m_Name: FancyMuffinUpgradeContent
   m_TagString: Untagged
@@ -2974,6 +3021,33 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1415964804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415964801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33859e398c4ba099561b62f946337d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1415964803}
+  holderImage: {fileID: 449234828}
+  priceText: {fileID: 398865616}
+  levelText: {fileID: 799911401}
+  icon: {fileID: 1307412396}
+  currencyIcon: {fileID: 1582987089}
+  purchaseAvailableTextColor: {r: 0.27450982, g: 0.7490196, b: 0.22352943, a: 1}
+  purchaseDisabledTextColor: {r: 0.7490196, g: 0.24705884, b: 0.29411766, a: 1}
+  upgradableType: 1
+  pricePerLevel:
+  - 50
+  - 200
+  - 500
+  - 5000
+  - 50000
 --- !u!1 &1532041772
 GameObject:
   m_ObjectHideFlags: 0
@@ -3301,9 +3375,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupButton: {fileID: 1588279700}
-  CooldownDuration: 3
+  CooldownDurationPerLevel:
+  - 0
+  - 10
+  - 9
+  - 8
+  - 7
+  - 5
   CooldownBar: {fileID: 1779028824}
-  MuffinPerActivation: 100
+  MuffinPerActivationPerLevel:
+  - 0
+  - 100
+  - 200
+  - 500
+  - 5000
   IconTransform: {fileID: 1123371798}
   AnimationDuration: 0.3
   WiggleAmplitude: 5

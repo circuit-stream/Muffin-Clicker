@@ -1,11 +1,22 @@
+using System;
+using MuffinClicker.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class Powerup : MonoBehaviour
 {
+    protected int currentUpgradableLevel;
+    protected abstract UpgradableType upgradableType { get; }
+
     public Button powerupButton;
 
-    public float CooldownDuration = 3;
+    public float[] CooldownDurationPerLevel = {0, 10, 9, 8, 7, 5};
+    private float CooldownDuration =>
+        currentUpgradableLevel >= CooldownDurationPerLevel.Length
+            ? CooldownDurationPerLevel[CooldownDurationPerLevel.Length - 1]
+            : CooldownDurationPerLevel[currentUpgradableLevel];
+
+
     public RectTransform CooldownBar;
     private float cooldownBarHeight;
 
@@ -21,6 +32,17 @@ public abstract class Powerup : MonoBehaviour
         SetCooldownBarHeight();
 
         powerupButton.onClick.AddListener(OnClick);
+
+        var gameManager = GameManager.Instance;
+        currentUpgradableLevel = gameManager.GetUpgradableLevel(upgradableType);
+        gameManager.OnUpgradableLevelChanged += OnUpgradableLevelChanged;
+
+        gameObject.SetActive(currentUpgradableLevel > 0);
+    }
+
+    public void OnDestroy()
+    {
+        GameManager.Instance.OnUpgradableLevelChanged -= OnUpgradableLevelChanged;
     }
 
     public virtual void Update()
@@ -37,6 +59,15 @@ public abstract class Powerup : MonoBehaviour
         powerupButton.interactable = false;
         PerformPowerupEffect();
         ResetCooldown();
+    }
+
+    protected virtual void OnUpgradableLevelChanged(UpgradableType changedType, int newLevel)
+    {
+        if (changedType != upgradableType)
+            return;
+
+        gameObject.SetActive(true);
+        currentUpgradableLevel = newLevel;
     }
 
     private void ResetCooldown()
