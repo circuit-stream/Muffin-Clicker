@@ -1,9 +1,21 @@
+using MuffinClicker.Enums;
 using UnityEngine;
 
 public class MilkshakePowerup : Powerup
 {
-    public float MuffiinExtraMultiplier = 1;
-    public float PowerupDuration = 3;
+    public float[] MultiplierPerLevel = {0, 1, 1.5f, 2, 3, 5};
+    private float MuffiinExtraMultiplier =>
+        currentUpgradableLevel >= MultiplierPerLevel.Length
+            ? MultiplierPerLevel[MultiplierPerLevel.Length - 1]
+            : MultiplierPerLevel[currentUpgradableLevel];
+
+    public float[] PowerupDurationPerLevel = {0, 3, 4, 5, 6, 7};
+    private float PowerupDuration =>
+        currentUpgradableLevel >= PowerupDurationPerLevel.Length
+            ? PowerupDurationPerLevel[PowerupDurationPerLevel.Length - 1]
+            : PowerupDurationPerLevel[currentUpgradableLevel];
+
+    protected override UpgradableType upgradableType => UpgradableType.Milkshake;
 
     private float remainingPowerupDuration;
 
@@ -30,6 +42,17 @@ public class MilkshakePowerup : Powerup
         base.Start();
 
         myRectTransform = GetComponent<RectTransform>();
+    }
+
+    protected override void OnUpgradableLevelChanged(UpgradableType changedType, int newLevel)
+    {
+        if (IsPowerupActive)
+            DisablePowerup();
+
+        base.OnUpgradableLevelChanged(changedType, newLevel);
+
+        if (IsPowerupActive)
+            GameManager.Instance.MuffinMultiplier += MuffiinExtraMultiplier;
     }
 
     protected override void PerformPowerupEffect()

@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using MuffinClicker.Enums;
 using UnityEngine;
 
 public class Muffin : MonoBehaviour
 {
-    public int MuffinPerClick = 1;
+    public double[] MuffinPerClickPerLevel = {0, 1, 4, 16, 256, 1024};
+    private double MuffinPerClick =>
+        currentUpgradableLevel >= MuffinPerClickPerLevel.Length
+            ? MuffinPerClickPerLevel[MuffinPerClickPerLevel.Length - 1]
+            : MuffinPerClickPerLevel[currentUpgradableLevel];
+
+    private int currentUpgradableLevel;
 
     public RectTransform[] Spinlights;
     public float SpinlightVelocity;
@@ -23,14 +29,16 @@ public class Muffin : MonoBehaviour
     public float bounceVelocity = 20;
     public AnimationCurve AmplitudeCurve;
     public RectTransform MuffinButton;
+
     private Coroutine muffinButtonAnimationCoroutine;
     private float muffinButtonAnimationDuration;
 
     private RectTransform myRectTransform;
+    private GameManager gameManager;
 
     public void OnClick()
     {
-        double addedValue = GameManager.Instance.AddMuffins(MuffinPerClick);
+        double addedValue = gameManager.AddMuffins(MuffinPerClick);
         ClickRewardFeedback((int) addedValue);
         CreateLittleMuffin();
         StartMuffinButtonAnimation();
@@ -47,8 +55,24 @@ public class Muffin : MonoBehaviour
         myRectTransform = GetComponent<RectTransform>();
         clickRewardAnimationInfos = new List<MuffinClickRewardAnimationInfo>();
         muffinButtonAnimationDuration = AmplitudeCurve.keys[AmplitudeCurve.length - 1].time;
+
+        gameManager = GameManager.Instance;
+        currentUpgradableLevel = gameManager.GetUpgradableLevel(UpgradableType.Muffin);
+        gameManager.OnUpgradableLevelChanged += OnUpgradableLevelChanged;
     }
 
+    public void OnDestroy()
+    {
+        gameManager.OnUpgradableLevelChanged -= OnUpgradableLevelChanged;
+    }
+
+    private void OnUpgradableLevelChanged(UpgradableType changedType, int newLevel)
+    {
+        if (changedType != UpgradableType.Muffin)
+            return;
+
+        currentUpgradableLevel = newLevel;
+    }
 
     private void AnimateSpinlights()
     {
