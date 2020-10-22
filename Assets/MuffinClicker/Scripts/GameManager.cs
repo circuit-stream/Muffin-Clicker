@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using MuffinClicker.Enums;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,30 @@ public class GameManager : MonoBehaviour
 
     private SaveData saveData;
     private bool autoSaveEnabled;
+
+    public delegate void OnUpgradableLevelChangedDelegate(UpgradableType changedUpgradableType, int newLevel);
+    public OnUpgradableLevelChangedDelegate OnUpgradableLevelChanged;
+
+    public int GetUpgradableLevel(UpgradableType upgradableType)
+    {
+        return saveData.GetUpgradableLevel(upgradableType);
+    }
+
+    public void IncreaseUpgradableLevel(UpgradableType upgradableType, double muffinCost, int amount = 1)
+    {
+        if (muffinCost > MuffinAmount)
+            throw new Exception("Trying to buy upgrade with insufficient muffins");
+
+        MuffinAmount -= muffinCost;
+
+        var newLevel = GetUpgradableLevel(upgradableType) + amount;
+        saveData.SetUpgradableLevel(upgradableType, newLevel);
+
+        if (OnUpgradableLevelChanged != null)
+        {
+            OnUpgradableLevelChanged(upgradableType, newLevel);
+        }
+    }
 
     private void Awake()
     {
@@ -79,17 +104,17 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey(saveKey))
         {
             string serializedSaveData = PlayerPrefs.GetString(saveKey);
-            saveData = JsonUtility.FromJson<SaveData>(serializedSaveData);
+            saveData = SaveData.Deserialize(serializedSaveData);
 
             return;
         }
 
-        saveData = new SaveData();
+        saveData = new SaveData(true);
     }
 
     private void Save()
     {
-        string serializedSaveData = JsonUtility.ToJson(saveData);
+        string serializedSaveData = saveData.Serialize();
         PlayerPrefs.SetString(saveKey, serializedSaveData);
     }
 }
