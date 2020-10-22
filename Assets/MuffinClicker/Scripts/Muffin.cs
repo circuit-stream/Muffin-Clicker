@@ -30,8 +30,8 @@ public class Muffin : MonoBehaviour
 
     public void OnClick()
     {
-        GameManager.Instance.AddMuffins(MuffinPerClick);
-        ClickRewardFeedback();
+        double addedValue = GameManager.Instance.AddMuffins(MuffinPerClick);
+        ClickRewardFeedback((int) addedValue);
         CreateLittleMuffin();
         StartMuffinButtonAnimation();
     }
@@ -72,14 +72,14 @@ public class Muffin : MonoBehaviour
         newObject.Setup(RandomSpawnPosition());
     }
 
-    private void ClickRewardFeedback()
+    private void ClickRewardFeedback(int rewardValue)
     {
         RectTransform newObject = GameObject.Instantiate(MuffinClickRewardPrefab, myRectTransform);
 
         newObject.rotation = Quaternion.identity;
         newObject.localPosition = RandomSpawnPosition();
 
-        MuffinClickRewardAnimationInfo animationInfo = new MuffinClickRewardAnimationInfo(newObject, MuffinPerClick);
+        MuffinClickRewardAnimationInfo animationInfo = new MuffinClickRewardAnimationInfo(newObject, rewardValue);
         clickRewardAnimationInfos.Add(animationInfo);
     }
 

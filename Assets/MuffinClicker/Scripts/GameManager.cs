@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float MuffinMultiplier { get; set; }
+
     private SaveData saveData;
     private bool autoSaveEnabled;
 
@@ -32,13 +34,17 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
+        MuffinMultiplier = 1;
         LoadSaveData();
         StartCoroutine(SaveCoroutine());
     }
 
-    public void AddMuffins(double addedValue)
+    public double AddMuffins(double requestedValue)
     {
+        var addedValue = requestedValue * MuffinMultiplier;
         SetMuffins(MuffinAmount + addedValue);
+
+        return addedValue;
     }
 
     private void SetMuffins(double newValue)
