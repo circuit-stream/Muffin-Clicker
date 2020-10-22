@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class NumberPrettifyLib
 {
-    public static string PrettifyNumber(double value)
+    public static string PrettifyNumber(double value, bool allowDecimals = false)
     {
         int magnitude = value <= 1 ? 0 : Mathf.FloorToInt((float) Math.Log10(value));
         int magnitudeIndex = Mathf.FloorToInt(magnitude / 3f);
@@ -11,8 +11,8 @@ public static class NumberPrettifyLib
         double divisor = Math.Pow(10, magnitudeIndex * 3);
 
         double shortNumber = value / divisor;
-        string digits = String.Format(magnitude >= 3 ? "{0:0.###}" : "{0:0}", shortNumber);
-
+        string digitsFormater = magnitude >= 3 || allowDecimals ? "{0:0.###}" : "{0:0}";
+        string digits = String.Format(digitsFormater, shortNumber);
 
         return $"{digits} {GetNumberSuffix(magnitudeIndex)}";
     }

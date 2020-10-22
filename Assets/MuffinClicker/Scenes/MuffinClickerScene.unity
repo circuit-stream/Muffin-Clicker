@@ -997,6 +997,13 @@ MonoBehaviour:
   - 16
   - 256
   - 1024
+  MuffinPerSecondPerLevel:
+  - 0
+  - 0.1
+  - 0.5
+  - 2
+  - 5
+  - 20
   Spinlights:
   - {fileID: 1594047314}
   - {fileID: 28660337}
@@ -4380,3 +4387,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MuffinAmountText: {fileID: 1710630146}
+  MuffinPerSecondText: {fileID: 1613461460}
+  Muffin: {fileID: 436119271}

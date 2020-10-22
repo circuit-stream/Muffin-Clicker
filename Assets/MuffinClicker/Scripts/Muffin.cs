@@ -11,6 +11,12 @@ public class Muffin : MonoBehaviour
             ? MuffinPerClickPerLevel[MuffinPerClickPerLevel.Length - 1]
             : MuffinPerClickPerLevel[currentUpgradableLevel];
 
+    public double[] MuffinPerSecondPerLevel = {0, 0.1, 0.5, 2, 5, 20};
+    public double MuffinPerSecond =>
+        currentUpgradableLevel >= MuffinPerSecondPerLevel.Length
+            ? MuffinPerSecondPerLevel[MuffinPerSecondPerLevel.Length - 1]
+            : MuffinPerSecondPerLevel[currentUpgradableLevel];
+
     private int currentUpgradableLevel;
 
     public RectTransform[] Spinlights;
@@ -48,6 +54,8 @@ public class Muffin : MonoBehaviour
     {
         AnimateSpinlights();
         AnimateClickRewards();
+
+        gameManager.AddMuffins(MuffinPerSecond * Time.deltaTime);
     }
 
     public void Start()
