@@ -69,7 +69,7 @@ public class UpgradeButton : MonoBehaviour
     private void SetLevelInfo()
     {
         levelText.text = currentLevel.ToString();
-        priceText.text = CurrentUpgradePrice.ToString();
+        priceText.text = NumberPrettifyLib.PrettifyNumber(CurrentUpgradePrice);
     }
 
     private void OnClick()

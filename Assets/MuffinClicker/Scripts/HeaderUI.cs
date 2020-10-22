@@ -20,6 +20,6 @@ public class HeaderUI : MonoBehaviour
 
     private void SetTexts()
     {
-        MuffinAmountText.text = $"{gameManager.MuffinAmount} muffins";
+        MuffinAmountText.text = $"{NumberPrettifyLib.PrettifyNumber(gameManager.MuffinAmount)} muffins";
     }
 }
